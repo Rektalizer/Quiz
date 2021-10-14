@@ -1,4 +1,4 @@
-class Result {
+export class ResultClass {
   constructor(resultText: string, worth: number) {
     this.resultText = resultText;
     this.worth = worth;
@@ -7,7 +7,7 @@ class Result {
   resultText: string;
   worth: number;
 
-  check(worth: number): boolean {
+  public check(worth: number): boolean {
     return this.worth <= worth;
   }
 }

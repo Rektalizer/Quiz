@@ -1,1 +1,9 @@
-<p>quiz-action-buttons works!</p>
+<div *ngIf="!isFinished">
+  <button mat-raised-button color="primary" (click)="onNext()">
+    Next
+  </button>
+
+  <button mat-raised-button color="warn" (click)="onReset()">
+    End
+  </button>
+</div>

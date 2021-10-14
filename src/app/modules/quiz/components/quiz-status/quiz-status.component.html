@@ -1,1 +1,2 @@
-<p>quiz-status works!</p>
+<div *ngIf = "!isFinished">Question {{currentQuestionIndex}}/{{totalQuestionsCount}}</div>
+<div *ngIf = "isFinished">Congratulations! You completed the quiz.</div>

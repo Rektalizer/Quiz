@@ -1,13 +1,17 @@
-export class Question {
-  constructor(questionText: string, answers: string[]) {
+import {AnswerClass} from "./answer.class";
+
+export class QuestionClass {
+  constructor(questionText: string, answers: AnswerClass[]) {
     this.questionText = questionText;
     this.answers = answers;
   }
 
   questionText: string;
-  answers: string[];
+  answers: AnswerClass[];
 
-  answer(selected: any): number {
+  public answer(selected: any): number {
     return this.answers[selected]?.worth;
   }
+
+
 }

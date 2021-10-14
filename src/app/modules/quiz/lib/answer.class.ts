@@ -6,6 +6,8 @@ export class AnswerClass {
 
    answerText: string;
    worth: number;
+
+
 }
 
 

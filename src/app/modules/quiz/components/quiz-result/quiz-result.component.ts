@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-quiz-result',
@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./quiz-result.component.scss']
 })
 export class QuizResultComponent implements OnInit {
+
+  @Input() isFinished: boolean = false;
+  @Input() score:number = 0;
+  @Input() resultText:string = '';
 
   constructor() { }
 

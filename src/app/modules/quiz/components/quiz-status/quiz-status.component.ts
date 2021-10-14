@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-quiz-status',
@@ -9,7 +9,11 @@ export class QuizStatusComponent implements OnInit {
 
   constructor() { }
 
+  @Input() currentQuestionIndex:number = 0;
+  @Input() totalQuestionsCount:number = 0;
+  @Input() isFinished:boolean = false;
+
+
   ngOnInit(): void {
   }
-
 }
