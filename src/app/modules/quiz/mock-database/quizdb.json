@@ -1,0 +1,74 @@
+{
+  "variants": [
+    {
+      "id": "variant1",
+      "variantName": "Variant #1",
+      "questions": [
+        {
+          "questionText": "50+50?",
+          "answers": [
+            {
+              "answer": "0",
+              "answerWorth": "0"
+            },
+            {
+              "answer": "40",
+              "answerWorth": "0"
+            },
+            {
+              "answer": "80",
+              "answerWorth": "0"
+            },
+            {
+              "answer": "100",
+              "answerWorth": "40"
+            }
+          ]
+        },
+        {
+          "questionText": "Which animal says 'meow'?",
+          "answers": [
+            {
+              "answer": "dog",
+              "answerWorth": "0"
+            },
+            {
+              "answer": "cat",
+              "answerWorth": "40"
+            },
+            {
+              "answer": "duck",
+              "answerWorth": "0"
+            },
+            {
+              "answer": "human",
+              "answerWorth": "20"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "result": "Very bad",
+          "resultScore": "0"
+        },
+        {
+          "result": "Below average",
+          "resultScore": "30"
+        },
+        {
+          "result": "Average",
+          "resultScore": "50"
+        },
+        {
+          "result": "Very good",
+          "resultScore": "70"
+        },
+        {
+          "result": "Perfect",
+          "resultScore": "100"
+        }
+      ]
+    }
+  ]
+}

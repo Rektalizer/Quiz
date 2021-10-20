@@ -1,12 +1,18 @@
 <p>quiz works!</p>
-<ng-container *ngIf="!!quizRepresentation" >
+<ng-container *ngIf="!!quizRepresentation">
+
+  <app-quiz-selector
+    (quizStarted)="onQuizSelected($event)"
+    [quizVariantsName]="quizRepresentation.quizVariantsNames"
+    [quizCurrentVariantName]="quizRepresentation.quizCurrentVariantName">
+  </app-quiz-selector>
 
   <app-quiz-qestion
     (answerSelect)="onAnswerSelect($event)"
-  [questionText]="quizRepresentation.questionText"
-  [isFinished]="quizRepresentation.isFinished"
-  [answerTexts]="quizRepresentation.answerTexts">
-</app-quiz-qestion>
+    [questionText]="quizRepresentation.questionText"
+    [isFinished]="quizRepresentation.isFinished"
+    [answerTexts]="quizRepresentation.answerTexts">
+  </app-quiz-qestion>
 
   <app-quiz-action-buttons
     [isFinished]="quizRepresentation.isFinished"
@@ -25,5 +31,6 @@
     [isFinished]="quizRepresentation.isFinished"
     [score]="quizRepresentation.score"
     [resultText]="quizRepresentation.resultText"
-  ></app-quiz-result></ng-container>
+  ></app-quiz-result>
+</ng-container>
 

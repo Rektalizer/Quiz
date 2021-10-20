@@ -8,6 +8,8 @@ import {QuizResultComponent} from './components/quiz-result/quiz-result.componen
 import {QuizService} from "./service/quiz.service";
 import {SharedModule} from "../../shared/shared.module";
 import {MatButtonModule} from "@angular/material/button";
+import { QuizSelectorComponent } from './components/quiz-selector/quiz-selector.component';
+import {MatSelectModule} from "@angular/material/select";
 
 //containers
 
@@ -23,16 +25,18 @@ import {MatButtonModule} from "@angular/material/button";
     QuizQuestionComponent,
     QuizActionButtonsComponent,
     QuizStatusComponent,
-    QuizResultComponent
+    QuizResultComponent,
+    QuizSelectorComponent
   ],
   exports: [
     QuizComponent
   ],
-  imports: [
-    SharedModule,
-    CommonModule,
-    MatButtonModule
-  ],
+    imports: [
+        SharedModule,
+        CommonModule,
+        MatButtonModule,
+        MatSelectModule
+    ],
   providers: [
     QuizService
   ]

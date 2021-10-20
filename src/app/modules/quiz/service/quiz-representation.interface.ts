@@ -6,4 +6,6 @@ export interface QuizRepresentationInterface {
   totalQuestionsCount: number,
   score: number,
   resultText: string
+  quizCurrentVariantName: string,
+  quizVariantsNames: string[]
 }

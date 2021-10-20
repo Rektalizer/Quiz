@@ -7,7 +7,6 @@ import {QuizRepresentationInterface} from "../service/quiz-representation.interf
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss'],
-  providers: [QuizService]
 })
 export class QuizComponent implements OnInit {
 
@@ -16,6 +15,7 @@ export class QuizComponent implements OnInit {
 
   quizRepresentation?: QuizRepresentationInterface;
   selectedAnswerIndex: number = -1;
+  selectedVariantIndex: number = -1;
 
   ngOnInit(): void {
     console.log('Quiz successfully initialized');
@@ -44,6 +44,14 @@ export class QuizComponent implements OnInit {
 
   onAnswerSelect(selectedAnswerIndex: number) {
     this.selectedAnswerIndex = selectedAnswerIndex;
+  }
+
+  onQuizSelected(selectedVariantIndex: number) {
+    this.selectedVariantIndex = selectedVariantIndex;
+    this.quizService.handleAction('Select',{selectedVariantIndex: this.selectedVariantIndex}, (error,result) =>{
+      this.render()
+    })
+    console.log("Quiz started with variant: " + this.selectedVariantIndex)
   }
 
 }

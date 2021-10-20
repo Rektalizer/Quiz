@@ -1,0 +1,15 @@
+<ng-container>
+  <mat-form-field appearance="fill">
+  <mat-label>Select variant:</mat-label>
+  <mat-select [(value)]="quizCurrentVariantName">
+    <mat-option *ngFor="let item of quizVariantsName" [value]="item">
+{{item}}
+    </mat-option>
+  </mat-select>
+  </mat-form-field>
+</ng-container>
+<div>
+  <button (click)="onQuizSelected()">
+    Start
+  </button>
+</div>
