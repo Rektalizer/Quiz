@@ -1,4 +1,5 @@
 export interface QuizRepresentationInterface {
+  isStarted: boolean,
   isFinished: boolean,
   questionText: string,
   answerTexts: string[],

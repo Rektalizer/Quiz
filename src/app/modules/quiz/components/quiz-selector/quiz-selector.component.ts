@@ -9,6 +9,7 @@ export class QuizSelectorComponent implements OnInit {
 
   constructor() { }
 
+  @Input() isStarted: boolean = false;
   @Input() quizVariantsName: string[] = []
   @Input() quizCurrentVariantName: string = ''
 

@@ -29,11 +29,12 @@ export class MockDatabaseService implements DataCRUDControllerInterface {
 
   public readById(variant_id: string): ReadDTO | undefined {
     let filteredData = this.data.filter((variants) => variants.variant_id === variant_id);
-    return {
-      _id: filteredData[0].variant_id,
-      payload: filteredData[0]
+      return {
+        _id: filteredData[0].variant_id,
+        payload: filteredData[0]
+      }
     }
-  }
+
 
 
 }

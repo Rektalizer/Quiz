@@ -10,8 +10,6 @@ export class QuizActionButtonsComponent implements OnInit {
 
   @Input() isFinished: boolean = false;
   @Input() currentQuestionIndex:number = 0;
-
-
   @Output() resetQuiz: EventEmitter<any> = new EventEmitter();
   @Output() nextQuestion: EventEmitter<any> = new EventEmitter();
 

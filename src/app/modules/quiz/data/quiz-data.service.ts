@@ -17,8 +17,8 @@ export class QuizDataService {
     return variantsNames.map(value => value._id);
   }
 
-  getQuizData(quizVariantName:string):QuizDataInterface {
-    let currentQuizData = this.mockDataBaseService.readById(quizVariantName);
+  getQuizData(quizVariantID:string):QuizDataInterface {
+    let currentQuizData = this.mockDataBaseService.readById(quizVariantID);
     return currentQuizData?.payload
   }
 

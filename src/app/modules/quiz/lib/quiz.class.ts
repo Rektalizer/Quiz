@@ -9,7 +9,7 @@ export class QuizClass {
   currentQuizData: QuizDataInterface
   questions: QuestionClass[];
   results: ResultClass[];
-  counter: number = 0;
+  counter: number = -1;
   result: number = 0;
   score: number = 0;
 
@@ -37,6 +37,11 @@ export class QuizClass {
       )
     ))))
     this.results = this.currentQuizData.results.map(value => new ResultClass(value.resultText, value.worth))
+    this.counter++
+  }
+
+  public isStarted() : boolean {
+    return this.counter != -1;
   }
 
   public isFinished(): boolean {
@@ -56,7 +61,7 @@ export class QuizClass {
   }
 
   public reset():void {
-    this.counter = 0;
+    this.counter = -1;
     this.result = 0;
     this.score = 0;
   }

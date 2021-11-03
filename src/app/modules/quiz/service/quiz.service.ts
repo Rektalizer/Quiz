@@ -49,6 +49,7 @@ export class QuizService {
 
   public getQuizRepresentation(): QuizRepresentationInterface {
     return {
+      isStarted: this.quiz.isStarted(),
       isFinished: this.quiz.isFinished(),
       questionText: this.quiz.getQuestionText(),
       answerTexts: this.getAnswerTexts(),
@@ -75,6 +76,21 @@ export class QuizService {
         callback();
         break;
       case "Select":
+      let quiz = new QuizClass(
+        [
+          new QuestionClass("",
+            [
+              new AnswerClass("", 0),
+            ]),
+        ]
+        , [
+          new ResultClass("", 0),
+        ], {
+          variant_id: '',
+          variantName: '',
+          questions: [{questionText: '', answers: [{answerText: '', worth: 0 }]}],
+          results: [{resultText: '', worth: 0}]
+        })
         let currentQuizData = this.quizDataService.getQuizData(payload.selectedVariantIndex)
         this.quiz.setQuizData(currentQuizData)
         callback();

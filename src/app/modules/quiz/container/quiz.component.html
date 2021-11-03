@@ -1,8 +1,9 @@
-<p>quiz works!</p>
-<ng-container *ngIf="!!quizRepresentation">
+<ng-container *ngIf="!!quizRepresentation" class="MainContainer">
+  <div class = "MainText">Quiz works!</div>
 
   <app-quiz-selector
     (quizStarted)="onQuizSelected($event)"
+    [isStarted]="quizRepresentation.isStarted"
     [quizVariantsName]="quizRepresentation.quizVariantsNames"
     [quizCurrentVariantName]="quizRepresentation.quizCurrentVariantName">
   </app-quiz-selector>
