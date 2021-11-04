@@ -16,6 +16,7 @@
   </app-quiz-qestion>
 
   <app-quiz-action-buttons
+    [isStarted]="quizRepresentation.isStarted"
     [isFinished]="quizRepresentation.isFinished"
     (resetQuiz)="handleReset($event)"
     (nextQuestion)="handleNext($event)"

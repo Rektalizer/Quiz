@@ -25,7 +25,6 @@ export class QuizComponent implements OnInit {
   private render(): void {
     this.quizRepresentation = this.quizService.getQuizRepresentation();
     console.log('Quiz render successful');
-    console.log(this.quizRepresentation);
   }
 
   handleNext(event: any) {

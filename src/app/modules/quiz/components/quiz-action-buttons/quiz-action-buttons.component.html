@@ -1,10 +1,13 @@
-<div *ngIf="!isFinished">
-  <button mat-raised-button color="primary" (click)="onNext()">
-    Next
-  </button>
-</div>
-<div>
-  <button mat-raised-button color="warn" (click)="onReset()">
-    Reset
-  </button>
-</div>
+<ng-container *ngIf="isStarted">
+  <div *ngIf="!isFinished">
+    <button mat-raised-button color="primary" (click)="onNext()">
+      Next
+    </button>
+  </div>
+  <div>
+    <button mat-raised-button color="warn" (click)="onReset()">
+      Reset
+    </button>
+  </div>
+</ng-container>
+

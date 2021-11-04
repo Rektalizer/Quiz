@@ -1,4 +1,4 @@
 export interface CreateDTO {
-  variant_id:string,
+  _id:string,
   payload:any
 }

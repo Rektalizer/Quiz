@@ -1,6 +1,6 @@
 import {variants} from "./quizdb";
-import {ReadDTO} from '../data/readDTO'
-import {DataCRUDControllerInterface} from "../data/data-CRUD-controller.interface";
+import {ReadDTO} from '../../data/CRUD-controller/readDTO'
+import {DataCRUDControllerInterface} from "../../data/CRUD-controller/data-CRUD-controller.interface";
 import {Injectable} from "@angular/core";
 
 @Injectable({

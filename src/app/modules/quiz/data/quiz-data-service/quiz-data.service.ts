@@ -1,5 +1,5 @@
-import {QuizDataInterface} from "../models/quiz-data.interface";
-import {MockDatabaseService} from "../mock-database/mock-database.service";
+import {QuizDataInterface} from "../../models/quiz-data.interface";
+import {MockDatabaseService} from "../../storage/mock-database/mock-database.service";
 import {Injectable} from "@angular/core";
 
 @Injectable({
