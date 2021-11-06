@@ -26,7 +26,7 @@ export class QuizStateService {
 
   getSavedState():QuizProgressStateInterface {
     // console.log('Asked for saved state:')
-    // console.log(currentSavedStateData)
+    // console.log(this.localStorageControllerService.readById())
     // @ts-ignore
     return this.localStorageControllerService.readById();
   }
