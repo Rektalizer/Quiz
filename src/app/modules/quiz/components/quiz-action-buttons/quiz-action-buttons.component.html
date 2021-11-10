@@ -1,8 +1,17 @@
 <ng-container *ngIf="isStarted">
-  <div *ngIf="!isFinished">
-    <button mat-raised-button color="primary" (click)="onNext()">
-      Next
-    </button>
+  <div *ngIf="selectedAnswerIndex !== -1">
+    <div *ngIf="!isFinished">
+      <button mat-raised-button color="primary" (click)="onNext()">
+        Next
+      </button>
+    </div>
+  </div>
+  <div *ngIf="selectedAnswerIndex === -1">
+    <div *ngIf="!isFinished">
+      <button mat-raised-button color="primary" disabled (click)="onNext()">
+        Next
+      </button>
+    </div>
   </div>
   <div>
     <button mat-raised-button color="warn" (click)="onReset()">

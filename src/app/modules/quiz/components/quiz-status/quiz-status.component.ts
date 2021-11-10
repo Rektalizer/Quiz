@@ -12,6 +12,7 @@ export class QuizStatusComponent implements OnInit {
   @Input() currentQuestionIndex:number = 0;
   @Input() totalQuestionsCount:number = 0;
   @Input() isFinished:boolean = false;
+  @Input() isStarted:boolean = false;
 
 
   ngOnInit(): void {

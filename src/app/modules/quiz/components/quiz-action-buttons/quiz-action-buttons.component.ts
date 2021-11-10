@@ -8,6 +8,7 @@ import {Subject} from "rxjs";
 })
 export class QuizActionButtonsComponent implements OnInit {
 
+  @Input() selectedAnswerIndex: number = -1;
   @Input() isStarted: boolean = false;
   @Input() isFinished: boolean = false;
   @Input() currentQuestionIndex:number = 0;

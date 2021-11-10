@@ -1,2 +1,4 @@
-<div *ngIf = "!isFinished">Question {{currentQuestionIndex}}/{{totalQuestionsCount}}</div>
+<ng-container *ngIf = "isStarted">
+  <div *ngIf = "!isFinished">Question {{currentQuestionIndex}}/{{totalQuestionsCount}}</div>
+</ng-container>
 <div *ngIf = "isFinished">Congratulations! You completed the quiz.</div>

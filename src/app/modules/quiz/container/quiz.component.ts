@@ -28,10 +28,15 @@ export class QuizComponent implements OnInit {
   }
 
   handleNext(event: any) {
-    this.quizService.handleAction('Next', {selectedAnswerIndex:this.selectedAnswerIndex}, (error, result) => {
-      this.render()
-    })
-    console.log("Next question called")
+    if (this.selectedAnswerIndex !== -1) {
+      this.quizService.handleAction('Next', {selectedAnswerIndex:this.selectedAnswerIndex}, (error, result) => {
+        this.render()
+      })
+      console.log("Next question called")
+    } else {
+      this.selectedAnswerIndex = -1;
+      console.log('No answer selected')
+    }
   }
 
   handleReset(event: any) {
@@ -51,6 +56,7 @@ export class QuizComponent implements OnInit {
       this.render()
     })
     console.log("Quiz started with variant: " + this.selectedVariantIndex)
+    this.selectedAnswerIndex = -1;
   }
 
 }
