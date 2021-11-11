@@ -9,6 +9,7 @@ import {MatRadioChange} from "@angular/material/radio";
 })
 export class QuizQuestionComponent implements OnInit {
 
+  @Input() isStarted: boolean = false
   @Input() isFinished: boolean = false
   @Input() questionText: string = ''
   @Input() answerTexts: string[] = []

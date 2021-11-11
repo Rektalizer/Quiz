@@ -1,6 +1,9 @@
-<ng-container *ngIf = "!isFinished">
-  <div>{{questionText}}</div>
-  <mat-radio-group (change)="onChange($event)" aria-label="Select an option">
-    <mat-radio-button *ngFor="let x of answerTexts; let i = index" [value]="i">{{x}}</mat-radio-button>
-  </mat-radio-group>
+<ng-container *ngIf="isStarted">
+  <ng-container *ngIf = "!isFinished">
+    <div>{{questionText}}</div>
+    <mat-radio-group (change)="onChange($event)" aria-label="Select an option">
+      <mat-radio-button *ngFor="let x of answerTexts; let i = index" [value]="i">{{x}}</mat-radio-button>
+    </mat-radio-group>
+  </ng-container>
 </ng-container>
+

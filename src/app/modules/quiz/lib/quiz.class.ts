@@ -5,47 +5,44 @@ import {QuizDataInterface} from "../models/quiz-data.interface";
 import {QuizProgressStateInterface} from "../models/quiz-progress-state.interface";
 
 
-
 export class QuizClass {
   currentQuizProgressState: QuizProgressStateInterface
   currentQuizData: QuizDataInterface
+  variant_id: string;
+  variantName: string;
   questions: QuestionClass[];
   results: ResultClass[];
-  result: number = 0;
-  selectedVariant: number = 0;
+  resultIndex: number = 0;
 
-  constructor(questions: QuestionClass[], results: ResultClass[], currentQuizData: QuizDataInterface, currentQuizProgressState: QuizProgressStateInterface) // тело опросника состоит из данных о тип теста, массивов вопросов и оценок и методов перехода к следующему вопросу, окончанию опроса, и подсчёта очков
+  constructor(currentQuizData: QuizDataInterface, currentQuizProgressState?: QuizProgressStateInterface) // тело опросника состоит из данных о тип теста, массивов вопросов и оценок и методов перехода к следующему вопросу, окончанию опроса, и подсчёта очков
   {
     //this.testType = testType; // тип теста
-    this.currentQuizProgressState = currentQuizProgressState;
+    this.variantName = currentQuizData.variantName
+    this.variant_id = currentQuizData.variant_id
+    this.questions = currentQuizData.questions.map((value => new QuestionClass(
+      value.questionText,
+      value.answers.map(value1 => new AnswerClass(
+          value1.answerText, value1.worth
+        )
+      ))))
+    this.results = currentQuizData.results.map(value => new ResultClass(value.resultText, value.worth))
+
+    this.currentQuizProgressState = currentQuizProgressState || {
+      variantId: currentQuizData.variant_id,
+      currentQuestionIndex: 0,
+      score: 0
+    };
+
     this.currentQuizData = currentQuizData;
-    this.questions = questions;
-    this.results = results;
-    this.reset();
   }
 
-  private quizStarted: boolean = false;
+  public quizStarted: boolean = false;
+  public quizFinished: boolean = false;
 
   public getCurrentVariant(): string {
     return this.currentQuizData.variantName;
   }
 
-  public setQuizData(quizData: QuizDataInterface) : void {
-    this.currentQuizData = quizData
-    // console.log('Current quiz data')
-    // console.log(this.currentQuizData)
-    this.questions = this.currentQuizData.questions.map((value => new QuestionClass(
-      value.questionText,
-      value.answers.map(value1 => new AnswerClass(
-        value1.answerText, value1.worth
-      )
-    ))))
-    this.results = this.currentQuizData.results.map(value => new ResultClass(value.resultText, value.worth))
-    this.currentQuizProgressState.currentQuestionIndex++  //костыль
-    this.quizStarted = true;
-    // console.log('Current quiz state');
-    // console.log(this.currentQuizProgressState);
-  }
 
   public getQuizProgressState(): QuizProgressStateInterface {
     return this.currentQuizProgressState = {
@@ -55,9 +52,14 @@ export class QuizClass {
     }
   }
 
-  public setQuizProgressState(state: QuizProgressStateInterface): void {
-    this.currentQuizProgressState = state;
-  }
+  public getAnswerTexts(): string[]{
+      let answerArray: string[] = [];
+      let answers = this.getAnswers();
+      for (let j = 0; j < answers.length; j++) {
+        answerArray.push('Ответ № ' + (j + 1) + ': ' + answers[j].answerText)
+      }
+      return answerArray;
+    }
 
 
   public isStarted() : boolean {
@@ -80,12 +82,6 @@ export class QuizClass {
     return this.questions[this.currentQuizProgressState.currentQuestionIndex]
   }
 
-  public reset():void {
-    this.quizStarted = false;
-    this.currentQuizProgressState.currentQuestionIndex = -1; //костыль
-    this.result = 0;
-    this.currentQuizProgressState.score = 0;
-  }
 
   public getAnswers():AnswerClass[] {
     return this.getCurrentQuestion()?.answers || [];
@@ -101,7 +97,7 @@ export class QuizClass {
   }
 
   public getResult(): string {
-    return this.results[this.result].resultText;
+    return this.results[this.resultIndex].resultText;
   }
 
   public getQuestionText(): string {
@@ -119,7 +115,7 @@ export class QuizClass {
   public evaluate() : void {
     for (let i = 0; i < this.results.length; i++) {
       if (this.results[i].check(this.currentQuizProgressState.score)) {
-        this.result = i;
+        this.resultIndex = i;
       }
     }
   }

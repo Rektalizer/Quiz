@@ -13,7 +13,7 @@ export class QuizComponent implements OnInit {
   constructor(private quizService: QuizService) {
   }
 
-  quizRepresentation?: QuizRepresentationInterface;
+  quizRepresentation?: QuizRepresentationInterface | void
   selectedAnswerIndex: number = -1;
   selectedVariantIndex: number = -1;
 
