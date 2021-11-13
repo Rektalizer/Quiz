@@ -27,6 +27,7 @@ export class QuizService {
       this.quiz.quizStarted = true;
     } else {
       this.quiz = new QuizClass(data, state)
+      this.quiz.quizStarted = true;
     }
   }
 
@@ -40,6 +41,15 @@ export class QuizService {
     if (this.quizStateService.getSavedState() !== undefined) {
       return this.quizStateService.getSavedState().variantId !== undefined;
     } else return false;
+  }
+
+  private saveCurrentQuizState(): void {
+    if (this.quiz === undefined) {
+      console.log('No quiz defined');
+    } else {
+      let currentQuizStateSelect = this.quiz.getQuizProgressState();
+      this.quizStateService.saveState(currentQuizStateSelect);
+    }
   }
 
 
@@ -75,39 +85,42 @@ export class QuizService {
     }
   }
 
-
   public getQuizRepresentation(): QuizRepresentationInterface {
-    if (this.quiz === undefined) {
-      console.log("There is no quiz presented, sending variants")
-      return this.prepareQuizRepresentation()
-    } else {
-      if (!this.isServiceInitialized) {
-        this.isServiceInitialized = true;
-        if (this.checkSavedStateExists()) {
-          let askToContinue = confirm('Do you want to continue from the last session?')
-          if (askToContinue) {
-            let loadedQuizState = this.quizStateService.getSavedState()
-            let currentQuizData = this.quizDataService.getQuizData(loadedQuizState.variantId)
-            // console.log('Loaded quiz state')
-            // console.log(loadedQuizState)
-            // console.log('Loaded quiz data')
-            // console.log(currentQuizData)
-            this.startQuiz(currentQuizData, loadedQuizState);
-            // console.log('Quiz data loaded into current instance')
-            // console.log(this.quiz);
-            // console.log('Quiz status loaded into current instance')
-            // console.log(this.quiz.currentQuizProgressState)
+    //проверить запущен ли квиз первый раз(перезагрузка страницы)
+    if (!this.isServiceInitialized) {
+      this.isServiceInitialized = true
+      //проверить есть ли сохранённый стейт
+      if (this.checkSavedStateExists()) {
+        let askToContinue = confirm('Do you want to continue from the last session?')
+        //если есть, предложить его загрузить, при согласии загрузить стейт
+        if (askToContinue) {
+          let loadedQuizState = this.quizStateService.getSavedState()
+          let currentQuizData = this.quizDataService.getQuizData(loadedQuizState.variantId)
+          // console.log('Loaded quiz state')
+          // console.log(loadedQuizState)
+          // console.log('Loaded quiz data')
+          // console.log(currentQuizData)
+          this.startQuiz(currentQuizData, loadedQuizState);
+          // console.log('Quiz data loaded into current instance')
+          // console.log(this.quiz);
+          // console.log('Quiz status loaded into current instance')
+          // console.log(this.quiz!.currentQuizProgressState)
+          return this.prepareQuizRepresentation()
+        } else {
+          if (this.quiz === undefined) {
+            console.log("There is no quiz presented, sending variants")
             return this.prepareQuizRepresentation()
           }
-          console.log('Quiz representation without loaded state')
-          return this.prepareQuizRepresentation()
         }
-        console.log('Normal quiz representation')
-        return this.prepareQuizRepresentation()
       }
-      console.log('Quiz representation for first launch(No state found)')
+    } else {
+      console.log('Normal quiz representation')
       return this.prepareQuizRepresentation()
     }
+    return this.prepareQuizRepresentation()
+    //если стейта нет или пользователь отказался, загрузить меню выбора вариантов
+    //если вариант загружен, начать квиз с выбранным варинатом
+    //во всех остальных случаях возвращать нормально отображение состояния
   }
 
 
@@ -120,6 +133,7 @@ export class QuizService {
         case "Select":
           let currentQuizData = this.quizDataService.getQuizData(payload.selectedVariantIndex)
           this.startQuiz(currentQuizData)
+          this.saveCurrentQuizState()
           callback();
           break;
       }
@@ -129,28 +143,25 @@ export class QuizService {
           this.quiz.answer(payload.selectedAnswerIndex);
           this.quiz.evaluate();
           this.quiz.next();
-          let currentQuizStateNext = this.quiz.getQuizProgressState();
-          this.quizStateService.saveState(currentQuizStateNext);
+          this.saveCurrentQuizState()
           callback();
           break;
         case "Reset":
-          let currentQuizStateReset = this.quiz.getQuizProgressState();
-          this.quizStateService.saveState(currentQuizStateReset);
+          this.saveCurrentQuizState()
           this.finishQuiz();
           callback();
           break;
         case "Select":
           let currentQuizData = this.quizDataService.getQuizData(payload.selectedVariantIndex)
-          this.startQuiz(currentQuizData)
           this.quiz.variant_id = payload.selectedVariantIndex;
-          let currentQuizStateSelect = this.quiz.getQuizProgressState();
-          this.quizStateService.saveState(currentQuizStateSelect);
+          this.startQuiz(currentQuizData)
+          this.saveCurrentQuizState()
           callback();
           break;
       }
     }
   }
-    }
+}
 
 
 
