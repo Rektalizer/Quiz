@@ -30,8 +30,8 @@ export class LocalStorageControllerService implements DataCRUDControllerInterfac
   //
   // }
 
-  // public delete(id: string): void {
-  //
-  // }
+  public delete(id: string): void {
+    this.quizStorage.removeItem('quiz-state')
+  }
 
 }

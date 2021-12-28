@@ -37,7 +37,6 @@ export class QuizClass {
   }
 
   public quizStarted: boolean = false;
-  public quizFinished: boolean = false;
 
   public getCurrentVariant(): string {
     return this.currentQuizData.variantName;
@@ -83,7 +82,7 @@ export class QuizClass {
   }
 
 
-  public getAnswers():AnswerClass[] {
+  private getAnswers():AnswerClass[] {
     return this.getCurrentQuestion()?.answers || [];
   }
 

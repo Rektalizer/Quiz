@@ -52,6 +52,14 @@ export class QuizService {
     }
   }
 
+  private deleteCurrentQuizState(): void {
+    if (this.quiz === undefined) {
+      console.log('No quiz defined');
+    } else {
+      let currentQuizStateSelect = this.quiz.getQuizProgressState();
+      this.quizStateService.deleteSavedState(currentQuizStateSelect);
+    }
+  }
 
   private prepareQuizRepresentation(): QuizRepresentationInterface {
     if (this.quiz === undefined) {
@@ -147,7 +155,7 @@ export class QuizService {
           callback();
           break;
         case "Reset":
-          this.saveCurrentQuizState()
+          this.deleteCurrentQuizState()
           this.finishQuiz();
           callback();
           break;

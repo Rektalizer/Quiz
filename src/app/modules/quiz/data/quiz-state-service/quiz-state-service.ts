@@ -31,4 +31,9 @@ export class QuizStateService {
     return this.localStorageControllerService.readById();
   }
 
+  deleteSavedState(state: QuizProgressStateInterface): void {
+    let deletedStateId = state.variantId;
+    this.localStorageControllerService.delete(deletedStateId);
+  }
+
 }
